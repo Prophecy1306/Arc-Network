@@ -19,10 +19,32 @@ You'll need WSL (Windows Subsystem for Linux) to follow this guide. If you don't
 ```
 wsl --install
 ```
-Restart your PC after installation, then open "Ubuntu" from your Start menu. That gives you a Linux terminal inside Windows.
+* >Restart your PC after installation, then open "Ubuntu" from your Start menu. That gives you a Linux terminal inside Windows.
 
 ### Install Foundry:
 ```
 curl -L foundry.paradigm.xyz | bash
 ```
+Reload your shell config:
+```
+source ~/.bashrc
+```
+Install the Foundry tools (forge, cast, anvil, chisel):
+```
+foundryup
+```
+* >Tip: If you use VS Code, type 'code .' inside your WSL terminal to open any folder directly in VS Code. You may need to install the "WSL" extension in VS Code first.
+
+* >From here on, every command is the same whether you're on Windows or Mac. Just make sure you're running them in your WSL Ubuntu terminal (Windows) or terminal (Mac).
+
+* >I'm on windows personally, so I'll cover the windows setup first. Mac instructions follow right after. Once Foundry is installed, every command from Step 1 onward is exactly the same regardless of your OS.
+
+## Step 1: Initialize a New Solidity Project
+```
+forge init hello-arc && cd hello-arc
+```
+* >This creates a new project folder called "hello-arc" and moves you into it. Open it in your code editor.
+
+Your control panel should look like this 👇 
+IMAGE
 
