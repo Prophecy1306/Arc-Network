@@ -260,3 +260,25 @@ foundryup
 You're good to go
 
 # *What's Next* : 
+From here, you can build further on your contract, add custom logic, or start exploring Arc’s native features like USDC for gas and fast finality. Since the mainnet is expected later in 2026, getting hands-on with the testnet now gives you a clear early advantage.
+
+# Done✔️✔️
+
+<pre>
+
+Stay Connected
+
+👉 Join for more updates and future releases: https://linktr.ee/EarlyCTs
+
+If you run into any issues, You can also reach me directly via DM.
+
+Thanks for checking out this.
+
+</pre>
+
+<div align="center">
+
+#  *❤️‍🔥 Happy Node Running 👨🏻‍💻*
+
+</div>
+
