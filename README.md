@@ -25,11 +25,11 @@ wsl --install
 ```
 curl -L foundry.paradigm.xyz | bash
 ```
-Reload your shell config:
+* >Reload your shell config:
 ```
 source ~/.bashrc
 ```
-Install the Foundry tools (forge, cast, anvil, chisel):
+* >Install the Foundry tools (forge, cast, anvil, chisel):
 ```
 foundryup
 ```
@@ -49,7 +49,7 @@ Your control panel should look like this 👇
 IMAGE
 
 ## Step 2: Set Up Your Environment Variables
-Create a .env file in the root of the "hello-arc" folder. You can do this manually in your editor or run:
+* >Create a .env file in the root of the "hello-arc" folder. You can do this manually in your editor or run:
 ```
 touch .env
 ```
@@ -65,15 +65,15 @@ ARC_TESTNET_RPC_URL="https://rpc.testnet.arc.network"
 Save and exit nano by pressing `Ctrl + X`, then `Y`, then `Enter`.
 
 ## Step 3: Write the Smart Contract
-First, remove the default Counter contract that Foundry generates:
+* >First, remove the default Counter contract that Foundry generates:
 ```
 rm src/Counter.sol
 ```
-Create your new contract file:
+* >Create your new contract file:
 ```
 touch src/HelloArchitect.sol
 ```
-Open it:
+* >Open it:
 ```
 nano src/HelloArchitect.sol
 ```
@@ -100,4 +100,124 @@ contract HelloArchitect {
         return greeting;
     }
 }
+```
+* >Simple contract. It stores a greeting, lets you update it, and emits an event when the greeting changes.
+* >Save and exit: `Ctrl + X`, then `Y`, then `Enter`.
+
+## Step 4: Write the Tests
+* >Remove the default script folder and test file:
+```
+rm -rf script
+rm test/Counter.t.sol
+```
+* >Create your test file:
+```
+touch test/HelloArchitect.t.sol
+```
+* >Open it:
+```
+nano test/HelloArchitect.t.sol
+```
+* >Paste this inside:
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+import "forge-std/Test.sol";
+import "../src/HelloArchitect.sol";
+
+contract HelloArchitectTest is Test {
+    HelloArchitect helloArchitect;
+
+    function setUp() public {
+        helloArchitect = new HelloArchitect();
+    }
+
+    function testInitialGreeting() public view {
+        string memory expected = "Hello Architect!";
+        string memory actual = helloArchitect.getGreeting();
+        assertEq(actual, expected);
+    }
+
+    function testSetGreeting() public {
+        string memory newGreeting = "Welcome to Arc Chain!";
+        helloArchitect.setGreeting(newGreeting);
+        string memory actual = helloArchitect.getGreeting();
+        assertEq(actual, newGreeting);
+    }
+
+    function testGreetingChangedEvent() public {
+        string memory newGreeting = "Building on Arc!";
+        vm.expectEmit(true, true, true, true);
+        emit HelloArchitect.GreetingChanged(newGreeting);
+        helloArchitect.setGreeting(newGreeting);
+    }
+}
+```
+* >Save and exit: `Ctrl + X`, then `Y`, then `Enter`.
+
+## Step 5: Test and Compile
+* >Run the tests:
+```
+forge test
+```
+* >You should see all three tests passing. If they do, compile:
+```
+forge build
+```
+
+## Step 6: Generate a Wallet
+* >You need a wallet to deploy with. Generate one using Foundry's cast:
+```
+cast wallet new
+```
+* >This gives you an address and a private key. Save both somewhere secure. Do not share your private key with anyone.
+* >Open the .env file we created earlier:
+```
+nano .env
+```
+* >Add your private key to the .env file:
+```
+PRIVATE_KEY="0x..."
+```
+* >Replace 0x... with your actual private key. Save and exit nano by pressing `Ctrl + X`, then `Y`, then `Enter`.
+* >Reload the environment variables:
+```
+source .env
+```
+You'll run this command again later whenever you add new variables to the .env file.
+
+## Step 7: Fund Your Wallet
+Go to faucet.circle.com, select Arc Testnet, paste the wallet address you just generated, and request testnet USDC.
+
+IMAGE👇
+
+* >Remember, USDC is the gas token on Arc. This is what pays for your deployment and transactions. No ETH needed.
+
+## Step 8: Deploy the Contract
+Run this command to deploy:
+```
+forge create src/HelloArchitect.sol:HelloArchitect \
+  --rpc-url $ARC_TESTNET_RPC_URL \
+  --private-key $PRIVATE_KEY \
+  --broadcast
+```
+After a successful deployment, you'll see output with your deployer address, the deployed contract address, and a transaction hash. 
+like this 👇
+
+IMAGE
+
+Copy the contract address from the "Deployed to:" line. Open your .env file:
+```
+nano .env
+```
+Add the contract address on a new line:
+```
+HELLOARCHITECT_ADDRESS="0x..."
+```
+* >Replace 0x... with your actual deployed contract address. Save and exit: `Ctrl + X`, then `Y`, then `Enter`.
+
+Reload your variables again:
+```
+source .env
 ```
