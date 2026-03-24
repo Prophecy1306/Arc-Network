@@ -53,9 +53,6 @@ Create a .env file in the root of the "hello-arc" folder. You can do this manual
 ```
 touch .env
 ```
-```
-touch .env
-```
 * >Open it:
 ```
 nano .env
