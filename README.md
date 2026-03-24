@@ -13,7 +13,7 @@ Arc is a Layer 1 blockchain by Circle built for stablecoin-based finance, and it
 
 </div>
 
-<div align="centre">
+<div align="center">
 
 ## **Getting Started (Windows)⚙️**
 
@@ -237,9 +237,9 @@ cast call $HELLOARCHITECT_ADDRESS "getGreeting()(string)" \
 Go to testnet.arcscan.app and paste the transaction hash from your deployment output. You'll see your contract deployment confirmed on the Arc Testnet explorer.
 
 ---
-<div align="centre">
+<div align="center">
 
-# **Getting Started (Mac)**
+## **Getting Started (Mac)**
 
 </div>
 
