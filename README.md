@@ -13,7 +13,11 @@ Arc is a Layer 1 blockchain by Circle built for stablecoin-based finance, and it
 
 </div>
 
+<div align="centre">
+
 ## **Getting Started (Windows)⚙️**
+
+</div>
 
 You'll need WSL (Windows Subsystem for Linux) to follow this guide. If you don't have it yet, open PowerShell as Administrator and run:
 ```
@@ -221,3 +225,38 @@ Reload your variables again:
 ```
 source .env
 ```
+## Step 9: Interact With Your Contract
+Call the getGreeting function on your deployed contract:
+```
+cast call $HELLOARCHITECT_ADDRESS "getGreeting()(string)" \
+  --rpc-url $ARC_TESTNET_RPC_URL
+```
+* >You should see "Hello Architect!" returned.
+
+## Step 10: Verify on the Explorer
+Go to testnet.arcscan.app and paste the transaction hash from your deployment output. You'll see your contract deployment confirmed on the Arc Testnet explorer.
+
+---
+<div align="centre">
+
+# **Getting Started (Mac)**
+
+</div>
+
+## Open your built in Terminal app. That's all you need.
+
+Install Foundry:
+```
+curl -L foundry.paradigm.xyz | bash
+```
+Reload your shell config:
+```
+source ~/.zshenv
+```
+Install the Foundry tools (forge, cast, anvil, chisel):
+```
+foundryup
+```
+You're good to go
+
+# *What's Next* : 
