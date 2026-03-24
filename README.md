@@ -48,3 +48,59 @@ forge init hello-arc && cd hello-arc
 Your control panel should look like this 👇 
 IMAGE
 
+## Step 2: Set Up Your Environment Variables
+Create a .env file in the root of the "hello-arc" folder. You can do this manually in your editor or run:
+```
+touch .env
+```
+```
+touch .env
+```
+* >Open it:
+```
+nano .env
+```
+* >Paste the following inside:
+```
+ARC_TESTNET_RPC_URL="https://rpc.testnet.arc.network"
+```
+* >Make sure you include the https:// prefix. Without it, your deployment commands will fail.
+Save and exit nano by pressing `Ctrl + X`, then `Y`, then `Enter`.
+
+## Step 3: Write the Smart Contract
+First, remove the default Counter contract that Foundry generates:
+```
+rm src/Counter.sol
+```
+Create your new contract file:
+```
+touch src/HelloArchitect.sol
+```
+Open it:
+```
+nano src/HelloArchitect.sol
+```
+* >Paste this code inside:
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+contract HelloArchitect {
+    string private greeting;
+
+    event GreetingChanged(string newGreeting);
+
+    constructor() {
+        greeting = "Hello Architect!";
+    }
+
+    function setGreeting(string memory newGreeting) public {
+        greeting = newGreeting;
+        emit GreetingChanged(newGreeting);
+    }
+
+    function getGreeting() public view returns (string memory) {
+        return greeting;
+    }
+}
+```
